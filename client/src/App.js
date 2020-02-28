@@ -67,6 +67,7 @@ function App() {
       <p>Title: {currentSongInfo.name}</p>
       <img src={currentSongInfo.albumCover}></img>
       
+      <a href='http://localhost:8888/login'>Click for real login</a>
 
     </div>
     
