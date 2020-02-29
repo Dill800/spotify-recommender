@@ -38,6 +38,10 @@ function App() {
     })
   }
 
+  function skip() {
+    spotifyApi.skipToNext();
+  }
+
   
   function getHashParams() {
     var hashParams = {};
@@ -53,10 +57,9 @@ function App() {
   }
 
   return (
-
     <div>
       <div>
-        <a href='http://localhost:8888'>Login to Spotify</a>
+        <a href='http://localhost:8888/login'>Login to Spotify</a>
       </div>
 
       <div>
@@ -64,13 +67,11 @@ function App() {
       </div>
 
       <button onClick={getCurrentSong}>update</button>
+      <button onClick={skip}>Skip</button>
       <p>Title: {currentSongInfo.name}</p>
       <img src={currentSongInfo.albumCover}></img>
-      
-      <a href='http://localhost:8888/login'>Click for real login</a>
 
     </div>
-    
   );
 }
 
