@@ -1,14 +1,9 @@
-/**
- * This is an example of a basic node.js script that performs
- * the Authorization Code oAuth2 flow to authenticate against
- * the Spotify Accounts.
- */
-
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+const path = require('path')
 
 var client_id = 'abce03ae316f45909a343f63a801a6da'; // Your client id
 var client_secret = '1ac27ab4ba96415abd73e00308890d46'; // Your secret
@@ -38,13 +33,14 @@ app.use(express.static(__dirname + '/public'))
    .use(cors())
    .use(cookieParser());
 
+// Main entry point for login
 app.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-top-read user-read-recently-played app-remote-control user-read-private user-read-email user-read-playback-state playlist-read-collaborative';
+  var scope = 'user-top-read user-modify-playback-state user-read-playback-state user-read-recently-played app-remote-control user-read-private user-read-email user-read-playback-state playlist-read-collaborative';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -57,7 +53,7 @@ app.get('/login', function(req, res) {
 
 app.get('/callback', function(req, res) {
 
-  // your application requests refresh and access tokens
+  // application requests refresh and access tokens
   // after checking the state parameter
 
   var code = req.query.code || null;
@@ -139,6 +135,17 @@ app.get('/refresh_token', function(req, res) {
       });
     }
   });
+});
+
+// heroku deployment boilerplate
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'../client/build/index.html'));
 });
 
 console.log('Listening on 8888');
