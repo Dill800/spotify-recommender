@@ -9,6 +9,8 @@ var client_id = 'abce03ae316f45909a343f63a801a6da'; // Your client id
 var client_secret = '1ac27ab4ba96415abd73e00308890d46'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
+// Use env port or default
+const port = process.env.PORT || 8888;
 
 /**
  * Generates a random string containing numbers and letters
@@ -148,5 +150,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'../client/build/index.html'));
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+app.listen(port, () => console.log(`Server now running on port ${port}!`));
