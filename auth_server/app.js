@@ -5,9 +5,21 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 const path = require('path')
 
+var config = require('./config')
+
 var client_id = 'abce03ae316f45909a343f63a801a6da'; // Your client id
 var client_secret = '1ac27ab4ba96415abd73e00308890d46'; // Your secret
-var redirect_uri = 'https://intense-dawn-23012.herokuapp.com/callback'; // Your redirect uri
+var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+
+var client_id = process.env.CLIENT_ID || config.client_id;
+var client_secret = process.env.CLIENT_SECRET || config.client_secret;
+var redirect_uri = process.env.REDIRECT_URI || config.redirect_uri;
+var server_name = process.env.SERVER_NAME || config.server_name;
+
+console.log(client_id)
+console.log(client_secret)
+console.log(redirect_uri)
+console.log(server_name)
 
 // Use env port or default
 const port = process.env.PORT || 8888;
@@ -100,8 +112,8 @@ app.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        // heroku messing around
-        res.redirect('https://intense-dawn-23012.herokuapp.com/#' +
+        // herok
+        res.redirect(server_name +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
