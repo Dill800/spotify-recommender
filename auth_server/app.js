@@ -7,7 +7,7 @@ const path = require('path')
 
 var client_id = 'abce03ae316f45909a343f63a801a6da'; // Your client id
 var client_secret = '1ac27ab4ba96415abd73e00308890d46'; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+var redirect_uri = 'https://intense-dawn-23012.herokuapp.com/callback'; // Your redirect uri
 
 // Use env port or default
 const port = process.env.PORT || 8888;
@@ -100,7 +100,8 @@ app.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('http://localhost:3000/#' +
+        // heroku messing around
+        res.redirect('https://intense-dawn-23012.herokuapp.com/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
