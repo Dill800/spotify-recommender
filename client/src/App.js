@@ -172,21 +172,6 @@ function App() {
 
     </div>
 
-
-    /*
-    <div>
-
-      <p>Welcome, {userData.display_name}</p>
-
-      <AudioChart data={currentSongAudioData} cat='cat' val='val'/>
-
-      <button onClick={getCurrentSong}>update</button>
-      <button onClick={skip}>Skip</button>
-      <Button disabled={currentSongInfo === null || isLoading} onClick={getRecommendations}>recom</Button>
-      
-      <AlbumCover isLoading={isLoading} currentSongInfo={currentSongInfo}></AlbumCover>
-    </div>
-    */
   );
 }
 

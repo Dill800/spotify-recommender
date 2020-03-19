@@ -3,6 +3,7 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+const path = require('path')
 
 var client_id = 'abce03ae316f45909a343f63a801a6da'; // Your client id
 var client_secret = '1ac27ab4ba96415abd73e00308890d46'; // Your secret
@@ -134,6 +135,17 @@ app.get('/refresh_token', function(req, res) {
       });
     }
   });
+});
+
+// heroku deployment boilerplate
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'../client/build/index.html'));
 });
 
 console.log('Listening on 8888');
