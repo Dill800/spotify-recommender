@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import SpotifyWebApi from 'spotify-web-api-js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import {Button, Container, Row, Col} from 'react-bootstrap'
 import AudioChart from './components/AudioChart'
 import Login from './components/Login/Login'
 import AlbumCover from './components/AlbumCover/AlbumCover'
-
 import axios from 'axios'
 
 const spotifyApi = new SpotifyWebApi();
@@ -47,7 +46,6 @@ function App() {
 
     if(token) {
       spotifyApi.setAccessToken(token);
-      console.log('set access token to ' + token)
     }
 
     spotifyApi.getMe().then(data => {
@@ -76,7 +74,6 @@ function App() {
        hashParams[e[1]] = decodeURIComponent(e[2]);
        e = r.exec(q);
     }
-    console.log(hashParams);
     return hashParams;
   }
 
@@ -157,6 +154,26 @@ function App() {
   }
 
   return (
+
+    <div className='center'>
+      <h1 className='landing-title'>Welcome, {userData.display_name}!</h1>
+
+      <div className='button-container'>
+      <Button className='button-item' variant="outline-primary" onClick={getCurrentSong}>Retrieve Song</Button>
+      <Button className='button-item' variant="outline-primary" onClick={skip}>Skip</Button>
+      <Button className='button-item' variant="outline-primary" disabled={currentSongInfo === null || isLoading} onClick={getRecommendations}>Recommendations</Button>
+
+      </div>
+      
+      <div className='databox'>
+        <AlbumCover isLoading={isLoading} currentSongInfo={currentSongInfo}></AlbumCover>
+        <AudioChart data={currentSongAudioData} cat='cat' val='val'/>
+      </div>
+
+    </div>
+
+
+    /*
     <div>
 
       <p>Welcome, {userData.display_name}</p>
@@ -165,10 +182,11 @@ function App() {
 
       <button onClick={getCurrentSong}>update</button>
       <button onClick={skip}>Skip</button>
-      <button onClick={getRecommendations}>recom</button>
+      <Button disabled={currentSongInfo === null || isLoading} onClick={getRecommendations}>recom</Button>
       
       <AlbumCover isLoading={isLoading} currentSongInfo={currentSongInfo}></AlbumCover>
     </div>
+    */
   );
 }
 

@@ -2,6 +2,44 @@
   text-align: center;
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  align-content: space-evenly;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-item {
+  padding: 5px;
+  margin: 10px 20px 0px 20px;
+  width: 200px;
+}
+
+.album {
+  width: 500px;
+  height: 500px;
+  
+}
+
+.landing-title {
+    font-weight: lighter;
+    font-size: 60px;
+}
+
+.databox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  text-align: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

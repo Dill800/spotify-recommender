@@ -1,16 +1,18 @@
 import React from 'react'
 import {Spinner} from 'react-bootstrap'
- 
+import '../AlbumCover/AlbumCover.css' 
+
 const AlbumCover = ( props ) => {
 
     if(props.currentSongInfo === null) {
-        return(<p>placeholder</p>)
+        return(<p>Data Unavailable</p>)
     }
 
     return(
  
-        props.isLoading ? <Spinner animation="border" variant="primary" /> : <img src={props.currentSongInfo.albumCover}></img>
- 
+        <div className='container'>
+        {props.isLoading ? <Spinner className='spinner' animation="border" variant="primary" /> : <img className='image' src={props.currentSongInfo.albumCover}></img>}
+        </div>
     )
 }
 export default AlbumCover;

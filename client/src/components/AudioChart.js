@@ -4,11 +4,9 @@ import {ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusA
 const AudioChart = ( props ) => {
 
 
-    console.log(props.data)
-
     return(
-        <ResponsiveContainer width={'99%'} height={300}>
-        <RadarChart outerRadius={90} width={730} height={250} data={props.data}>
+        <ResponsiveContainer width={'99%'} height={500}>
+        <RadarChart outerRadius={180} width={730} height={730} data={props.data}>
         <PolarGrid />
         <PolarAngleAxis dataKey={props.cat} />
         <Radar name='hi' dataKey={props.val} stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />

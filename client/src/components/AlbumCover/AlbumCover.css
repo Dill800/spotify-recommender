@@ -1,3 +1,21 @@
-.album-container {
-    
+.container {
+    height: 400px;
+    width: 400px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.image {
+    height: 400px;
+    width: 400px;
+    border-radius: 5px;
+    border: 2px solid #000;
+}
+
+.spinner {
+    height: 100px;
+    width: 100px;
 }
