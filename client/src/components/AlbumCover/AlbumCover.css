@@ -13,9 +13,21 @@
     width: 400px;
     border-radius: 5px;
     border: 2px solid #000;
+
+    animation: image 1.5s 1;
+
 }
 
 .spinner {
     height: 100px;
     width: 100px;
+}
+
+@keyframes image {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }

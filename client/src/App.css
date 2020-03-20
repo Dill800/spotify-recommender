@@ -30,6 +30,8 @@
 .landing-title {
     font-weight: lighter;
     font-size: 60px;
+
+    animation: main 3s 1;
 }
 
 .databox {
@@ -62,6 +64,31 @@
   color: white;
 }
 
+.song-title {
+  font-weight: lighter;
+  font-size: 50px;
+
+  animation: main 3s 1;
+}
+
+.artist {
+  font-weight: lighter;
+  font-size: 40px;
+  animation-delay: 1s;
+  animation: subtitle 4s 1;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  align-content: space-evenly;
+
+  height: 20vh;
+  width: 100%;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -72,5 +99,26 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes main {
+  0% {
+      opacity: 0%;
+  }
+  100% {
+      opacity: 100%;
+  }
+}
+
+@keyframes subtitle {
+  0% {
+    opacity: 0%;
+  }
+  30% {
+      opacity: 0%;
+  }
+  100% {
+      opacity: 100%;
   }
 }

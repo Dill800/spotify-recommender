@@ -6,34 +6,22 @@ import {Button, Container, Row, Col} from 'react-bootstrap'
 import AudioChart from './components/AudioChart'
 import Login from './components/Login/Login'
 import AlbumCover from './components/AlbumCover/AlbumCover'
-import axios from 'axios'
+import MainInfo from './components/MainInfo/MainInfo'
 
 const spotifyApi = new SpotifyWebApi();
 
 function App() {
 
-  let initDataList = [
-    {
-      cat: 'Dancability',
+  let initDataList = [];
+
+  // default empty RadarChart
+  let catagories=['Dancability', 'Energy','Speechiness', 'Acousticness', 'Liveness']
+  catagories.map(value => {
+    initDataList.push({
+      cat: value,
       val: 0
-    },
-    {
-      cat: 'Energy',
-      val: 0
-    },
-    {
-      cat: 'Speechiness',
-      val: 0
-    },
-    {
-      cat: 'Acousticness',
-      val: 0
-    },
-    {
-      cat: 'Liveness',
-      val: 0
-    }
-  ]
+    })
+  })
 
   const [currentSongInfo, setCurrentSongInfo] = useState(null);
   const [currentSongAudioData, setCurrentSongAudioData] = useState(initDataList);
@@ -110,19 +98,23 @@ function App() {
   function getCurrentSong() {
     spotifyApi.getMyCurrentPlaybackState()
     .then(data => {
-      setCurrentSongInfo(
-        {
-          name: data.item.name,
-          trackId: data.item.id,
-          albumCover: data.item.album.images[0].url,
-          currentArtistId: data.item.artists[0].id
-        }
-      )
+
+      // decode spotify artist id
+      spotifyApi.getArtist(data.item.artists[0].id)
+      .then(artist => {
+        setCurrentSongInfo(
+          {
+            name: data.item.name,
+            trackId: data.item.id,
+            albumCover: data.item.album.images[0].url,
+            currentArtist: artist.name
+          }
+        )
+      })
       
     })
     .catch(err => {
       console.log(err);
-      axios.get('http://localhost:8888/login', () => {})
     })
   }
 
@@ -156,10 +148,11 @@ function App() {
   return (
 
     <div className='center'>
-      <h1 className='landing-title'>Welcome, {userData.display_name}!</h1>
+
+      <MainInfo isLoading={isLoading} currentSongInfo={currentSongInfo} userData={userData}/>
 
       <div className='button-container'>
-      <Button className='button-item' variant="outline-primary" onClick={getCurrentSong}>Retrieve Song</Button>
+      <Button className='button-item' variant="outline-primary" onClick={getCurrentSong}>Retrieve Current Song</Button>
       <Button className='button-item' variant="outline-primary" onClick={skip}>Skip</Button>
       <Button className='button-item' variant="outline-primary" disabled={currentSongInfo === null || isLoading} onClick={getRecommendations}>Recommendations</Button>
 
@@ -170,8 +163,11 @@ function App() {
         <AudioChart data={currentSongAudioData} cat='cat' val='val'/>
       </div>
 
+      <p>Adding playlist generation capabilities soon</p>
+
     </div>
 
+  
   );
 }
 

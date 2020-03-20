@@ -1,0 +1,21 @@
+.song-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    align-content: space-evenly;
+  
+    height: 20vh;
+    width: 100%;
+}
+
+.landing-title {
+    font-weight: lighter;
+    font-size: 60px;
+
+    animation: main 3s 1;
+}
+
+.spacing {
+    margin: 0px 10px 0px 10px;
+}
