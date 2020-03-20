@@ -1,5 +1,5 @@
-var express = require('express'); // Express web server framework
-var request = require('request'); // "Request" library
+var express = require('express'); 
+var request = require('request'); 
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
@@ -7,21 +7,11 @@ const path = require('path')
 
 var config = require('./config')
 
-var client_id = 'abce03ae316f45909a343f63a801a6da'; // Your client id
-var client_secret = '1ac27ab4ba96415abd73e00308890d46'; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
-
 var client_id = process.env.CLIENT_ID || config.client_id;
 var client_secret = process.env.CLIENT_SECRET || config.client_secret;
 var redirect_uri = process.env.REDIRECT_URI || config.redirect_uri;
 var server_name = process.env.SERVER_NAME || config.server_name;
 
-console.log(client_id)
-console.log(client_secret)
-console.log(redirect_uri)
-console.log(server_name)
-
-// Use env port or default
 const port = process.env.PORT || 8888;
 
 /**
@@ -53,7 +43,7 @@ app.get('/login', function(req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  // your application requests authorization
+  // application requests authorization
   var scope = 'user-top-read user-modify-playback-state user-read-playback-state user-read-recently-played app-remote-control user-read-private user-read-email user-read-playback-state playlist-read-collaborative';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -69,7 +59,6 @@ app.get('/callback', function(req, res) {
 
   // application requests refresh and access tokens
   // after checking the state parameter
-
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -112,7 +101,7 @@ app.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        // herok
+        // edit for heroku deployment
         res.redirect(server_name +
           querystring.stringify({
             access_token: access_token,
@@ -157,7 +146,7 @@ app.get('/refresh_token', function(req, res) {
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// The "catchall" handler: for any request that doesn't
+// for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'../client/build/index.html'));

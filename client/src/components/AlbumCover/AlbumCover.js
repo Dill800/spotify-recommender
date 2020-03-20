@@ -5,7 +5,7 @@ import '../AlbumCover/AlbumCover.css'
 const AlbumCover = ( props ) => {
 
     if(props.currentSongInfo === null) {
-        return(<p>Data Unavailable</p>)
+        return(<p>Select "Retrieve" to retrieve current song data!</p>)
     }
 
     return(

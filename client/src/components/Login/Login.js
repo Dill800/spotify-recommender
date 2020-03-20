@@ -1,16 +1,19 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
-import axios from 'axios'
+import './Login.css'
+
 const Login = ( props ) => {
 
         //<a href='https://intense-dawn-23012.herokuapp.com/login'>
         //<a href='http://localhost:8888/login'></a>
     return(
-        <div>
+        <div className='container'>
 
-            
+            <h1>Have fun yall boys</h1>
+            <p>if you have apple music, sucks</p>
+
             <a href='https://intense-dawn-23012.herokuapp.com/login'>
-            <Button variant='outline-primary'>Log In to Spotify</Button>
+                <Button className='login-button' variant='outline-primary'>Log In to Spotify</Button>
             </a>
         </div>
     )
