@@ -12,7 +12,7 @@ const Login = ( props ) => {
             <h1>Have fun yall boys</h1>
             <p>if you have apple music, sucks</p>
 
-            <a href='http://localhost:8888/login'>
+            <a href='https://spotify-music-visualizer.herokuapp.com/login'>
                 <Button className='login-button' variant='outline-primary'>Log In to Spotify</Button>
             </a>
         </div>
