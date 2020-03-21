@@ -8,6 +8,8 @@ import Login from './components/Login/Login'
 import AlbumCover from './components/AlbumCover/AlbumCover'
 import MainInfo from './components/MainInfo/MainInfo'
 
+import {Palette} from 'react-palette'
+
 const spotifyApi = new SpotifyWebApi();
 
 function App() {
@@ -102,11 +104,13 @@ function App() {
       // decode spotify artist id
       spotifyApi.getArtist(data.item.artists[0].id)
       .then(artist => {
+        console.log(data)
         setCurrentSongInfo(
           {
             name: data.item.name,
             trackId: data.item.id,
             albumCover: data.item.album.images[0].url,
+            currentArtistId: data.item.artists[0].id,
             currentArtist: artist.name
           }
         )
@@ -160,7 +164,11 @@ function App() {
       
       <div className='databox'>
         <AlbumCover isLoading={isLoading} currentSongInfo={currentSongInfo}></AlbumCover>
-        <AudioChart data={currentSongAudioData} cat='cat' val='val'/>
+        <Palette src={currentSongInfo === null ? null : currentSongInfo.albumCover}>
+        {({data}) => (
+          <AudioChart color={data.vibrant} isLoading={isLoading} data={currentSongAudioData} currentSongInfo={currentSongInfo} cat='cat' val='val'/>
+        )}
+        </Palette>
       </div>
 
       <p>Adding playlist generation capabilities soon</p>
