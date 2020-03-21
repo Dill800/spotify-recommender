@@ -5,12 +5,11 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 const path = require('path')
 
-var config = require('./config')
 
-var client_id = process.env.CLIENT_ID || config.client_id;
-var client_secret = process.env.CLIENT_SECRET || config.client_secret;
-var redirect_uri = process.env.REDIRECT_URI || config.redirect_uri;
-var server_name = process.env.SERVER_NAME || config.server_name;
+var client_id = process.env.CLIENT_ID || require('./config').client_id;
+var client_secret = process.env.CLIENT_SECRET || require('./config').client_secret;
+var redirect_uri = process.env.REDIRECT_URI || require('./config').redirect_uri;
+var server_name = process.env.SERVER_NAME || require('./config').server_name;
 
 const port = process.env.PORT || 8888;
 
